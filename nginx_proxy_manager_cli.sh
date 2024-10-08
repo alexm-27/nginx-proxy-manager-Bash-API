@@ -860,15 +860,16 @@ check_existing_proxy_host() {
   EXISTING_HOST=$(echo "$RESPONSE" | jq -r --arg DOMAIN "$DOMAIN_NAMES" '.[] | select(.domain_names[] == $DOMAIN)')
 
   if [ -n "$EXISTING_HOST" ]; then
-    echo -e "\n 🔔 Proxy host for $DOMAIN_NAMES already exists.${COLOR_GREEN}"
-    read -p " 👉 Do you want to update it with the new configuration? (y/n): " -r
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
+    echo -e "\n 🔔 Proxy host for $DOMAIN_NAMES already exists. \n Updating Configuration... ${COLOR_GREEN}"
+    # Comment out prompt for automation purposes
+    # read -p " 👉 Do you want to update it with the new configuration? (y/n): " -r
+    # if [[ $REPLY =~ ^[Yy]$ ]]; then
       HOST_ID=$(echo "$EXISTING_HOST" | jq -r '.id')
       update_proxy_host "$HOST_ID"
-    else
-      echo -e "${COLOR_RESET} No changes made.\n"
-      exit 0
-    fi
+    # else
+    #   echo -e "${COLOR_RESET} No changes made.\n"
+    #   exit 0
+    # fi
   else
     create_new_proxy_host
   fi
