@@ -880,7 +880,7 @@ update_proxy_host() {
   echo -e "\n 🌀 Updating proxy host for $DOMAIN_NAMES..."
 
   if [ -n "$CUSTOM_LOCATIONS" ]; then
-    CUSTOM_LOCATIONS_ESCAPED=$(printf '%s' "$CUSTOM_LOCATIONS" | sed ':a;N;$!ba;s/\n/\\n/g' | sed 's/"/\\"/g')
+    CUSTOM_LOCATIONS_ESCAPED=$(printf '%s' "$CUSTOM_LOCATIONS" | sed ':a;N;$!ba;s/\n/\\n/g')
   else
     CUSTOM_LOCATIONS_ESCAPED="[]"
   fi
@@ -1466,7 +1466,7 @@ enable_ssl() {
 
   # Find all certificates for the given domain based on either domain_names or nice_name
   DOMAIN_CERTS=$(echo "$CERTIFICATES" | jq -c --arg domain "$DOMAIN_NAMES" \
-    '[.[] | select((.domain_names[] == $domain) or (.nice_name == $domain))]')
+    '[.[] | select((.domain_names[] == $domain) or (.nice_name == $domain) or (.domain_names[] | test("^\\*\\." + ($domain | split(".") | .[1:] | join(".")) + "$")))]')
 
   # Count the number of certificates found
   CERT_COUNT=$(echo "$DOMAIN_CERTS" | jq 'length')
