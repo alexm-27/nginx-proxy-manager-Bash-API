@@ -934,7 +934,7 @@ create_new_proxy_host() {
   echo -e "\n 🌍 Creating proxy host for $DOMAIN_NAMES..."
 
   if [ -n "$CUSTOM_LOCATIONS" ]; then
-    CUSTOM_LOCATIONS_ESCAPED=$(printf '%s' "$CUSTOM_LOCATIONS" | sed ':a;N;$!ba;s/\n/\\n/g' | sed 's/"/\\"/g')
+    CUSTOM_LOCATIONS_ESCAPED=$(printf '%s' "$CUSTOM_LOCATIONS" | sed ':a;N;$!ba;s/\n/\\n/g')
   else
     CUSTOM_LOCATIONS_ESCAPED="[]"
   fi
