@@ -133,7 +133,7 @@ EXPIRY_FILE="$TOKEN_DIR/expiry_${NGINX_IP}.txt"
 TOKEN_FILE="$TOKEN_DIR/token_${NGINX_IP}.txt"
 
 # Set Token duration validity.
-TOKEN_EXPIRY="1y"
+TOKEN_EXPIRY="1h"
 
 # Default variables (you can adapt)
 CACHING_ENABLED=false
